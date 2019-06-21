@@ -1,0 +1,163 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>事务管理系统</title>
+    {% block title %}{% endblock %}
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/index.css' %}">
+  </head>
+<style>
+	.body-fonts{
+        background-color: #e9ecef;
+		font-family: 'fontawesome-webfont';
+
+	}
+</style>
+<body class="body-fonts">
+
+<nav class="navbar navbar-default sticky-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
+            <span class="sr-only">切换导航条</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="my-nav">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'password:index' %}"style="padding-bottom: 10px;padding-top: 10px;">主页</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.session.is_login %}
+                  <li><a href="#"style="padding: 0px">欢迎：{{ request.session.user_name }}</a></li>
+                  <li><a href="/logout/" style="padding: 0px">退出</a></li>
+              {% else %}
+                  <li><a href="/login/"style="padding: 0px">登录</a></li>
+                  <li><a href="/register/"style="padding: 0px">注册</a></li>
+              {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+<!--头部图-->
+<div class="container">
+    <div class="jumbotron jumbotron-fluid"style="background-color: cadetblue;height: 200px">
+  <div class="container-fluid"style="text-align: center;padding-top: 10px">
+    <h2 class="display-4">个人事务管理系统</h2>
+  </div>
+
+</div>
+
+
+<div class="row">
+
+
+<!--博主卡片-->
+<div class="col-3">
+<div class="card shadow p-3 mb-3 rounded">
+  <img src="{% static 'img/324647.jpg' %}" class="img-rounded card-img-top">
+  <div class="card-body card-text-color">
+      <p class="card-text"><h5 style="color:dimgrey;"><strong>既然我已经踏上了这条道路，那么，任何东西都不应妨碍我沿着这条路走下去。</strong></h5></p>
+  </div>
+</div>
+    <button type="button" class="btn btn-primary btn-lg btn-block shadow p-3 mb-3 rounded"><a href="{% url 'password:password' %}" style="color: black">密码管理</a></button>
+    <button type="button" class="btn btn-primary btn-lg btn-block shadow p-3 mb-3 rounded"><a href="{% url 'myreport' %}" style="color: black">日程安排</a></button>
+    <button type="button" class="btn btn-primary btn-lg btn-block shadow p-3 mb-3 rounded"><a href="{% url 'memo:memo_list' %}" style="color: black">便签</a></button>
+    <button type="button" class="btn btn-primary btn-lg btn-block shadow p-3 mb-3 rounded"><a href="" style="color: black">账单</a></button>
+    <button type="button" class="btn btn-primary btn-lg btn-block shadow p-3 mb-3 rounded"><a href="{% url 'image:image_list' %}" style="color: black">相册管理</a></button>
+    <button type="button" class="btn btn-primary btn-lg btn-block shadow p-3 mb-3 rounded"><a href="{% url 'contact:contact_list' %}" style="color: black">联系人</a></button>
+</div>
+
+<!--内容-->
+{% block main %}
+     <div class="col-9 card shadow p-3 mb-3 rounded"style="padding-right: 0px;padding-left: 0px">
+
+  <h5 class="card-header"style="background-color: cadetblue">最新密码</h5>
+         <div class="row">
+{% for password in passwords %}
+  <div class="col-sm-6"style="padding-bottom: 30px;padding-left: 30px;padding-right: 30px;padding-top: 10px">
+    <div class="card">
+        <img src="/media/{{ password.image1 }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ password.appname }}</h5>
+        <p class="card-text">用户名：{{ password.user }}</p>
+        <p class="card-text"><small class="text-muted">{{ password.created_time }}</small></p>
+          <a href="{% url 'password:detail_password' password.id %}" class="btn btn-primary">more</a>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+
+</div>
+
+           <h5 class="card-header"style="background-color: cadetblue">最新便签</h5>
+         <div class="row ">
+{% for memo in memos %}
+  <div class="col-sm-6"style="padding-bottom: 30px;padding-left: 30px;padding-right: 30px;padding-top: 10px">
+    <div class="card">
+        <img src="/media/{{ memo.image2 }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">{{ memo.category }}</p>
+        <p class="card-text"><small class="text-muted">{{ memo.created_time }}</small></p>
+          <a href="{% url 'memo:detail_memo' memo.id %}" class="btn btn-primary">more</a>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+
+</div>
+
+<h5 class="card-header"style="background-color: cadetblue">最新照片</h5>
+<div class="row">
+{% for image in images %}
+  <div class="col-sm-4"style="padding-bottom: 30px;padding-left: 30px;padding-right: 30px;padding-top: 10px">
+    <div class="card">
+        <img src="/media/{{ image.image3 }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text"><small class="text-muted">{{image.created_time }}</small></p>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+
+</div>
+
+
+</div>
+{% endblock %}
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  </body>
+
+</html>

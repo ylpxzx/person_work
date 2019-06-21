@@ -1,0 +1,26 @@
+{% extends "./index.html" %}
+{% load static %}
+
+
+
+{% block main %}
+<div class="card col-8">
+
+<div class="jumbotron jumbotron-fluid"style="background-color: cornflowerblue;margin-top: 10px;">
+    <h2 class="display-4">添加照片</h2>
+  </div>
+
+    <form method="post" enctype="multipart/form-data">
+{{ form.non_field_errors }}
+        {% csrf_token %}
+
+ <div class="fieldWrapper">
+    {{ form.image3.errors }}
+    <label for="{{ form.image3.id_for_label }}"><h3>上传图片:</h3></label>
+    {{ form.image3 }}
+</div>
+ <button type="submit" class="btn btn-primary"style="float: right;">Submit</button>
+          </form>
+</div>
+
+{% endblock %}

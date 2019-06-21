@@ -1,0 +1,40 @@
+{% extends "./index.html" %}
+{% load static %}
+
+
+{% block main %}
+
+<div class="card col-8">
+     <button type="button" class="btn btn-primary btn-lg btn-block"style="background-color: cadetblue"><a href="{% url 'memo:memo_form' %}"style="color: black;">添加便签</a></button>
+  <div class="row no-gutters">
+
+
+
+
+         <div class="row">
+{% for memo in memos %}
+  <div class="col-sm-6"style="padding-bottom: 30px;padding-left: 30px;padding-right: 30px;padding-top: 10px">
+    <div class="card">
+        <img src="/media/{{ memo.image2 }}" class="card-img-top" alt="...">
+      <div class="card-body">
+          <p class="card-text"style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;">{{ memo.title }}</p>
+       <a href="..."  class="btn btn-primary">{{ memo.category }}</a><a href="{% url 'memo:detail_memo' memo.id %}"  class="btn btn-primary"style="float: right;">Details</a>
+        <p class="card-text"style="padding-top: 10px"><small class="text-muted">{{ memo.created_time }}</small></p>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+
+
+</div>
+
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock %}

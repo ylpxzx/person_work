@@ -1,0 +1,41 @@
+{% extends "./index.html" %}
+{% load static %}
+
+
+{% block main %}
+
+<div class="card col-8">
+     <button type="button" class="btn btn-primary btn-lg btn-block"style="background-color: cadetblue"><a href="{% url 'contact:contact_form' %}"style="color: black;">添加联系人</a></button>
+  <div class="row no-gutters">
+
+         <div class="row">
+{% for contact in contacts %}
+  <div class="col-sm-4"style="padding-bottom: 10px;padding-left: 5px;padding-right: 5px;padding-top: 10px">
+    <div class="card bg-light">
+        <div class="card-header">姓名：{{ contact.name }}</div>
+      <div class="card-body">
+          <h5 class="card-title">关系：{{ contact.relation }}</h5>
+          <h5 class="card-title">邮箱:{{ contact.email }}</h5>
+          <h5 class="card-title">性别：{{ contact.get_sex_display  }}</h5>
+          <h5 class="card-title">职业：{{ contact.word }}</h5>
+          <h5 class="card-title">手机号：{{ contact.phone }}</h5>
+        <p class="card-text"style="padding-top: 10px"><small class="text-muted">{{ contact.created_time }}</small></p>
+           <a href="/delcontact/?id={{ contact.id }}"><button class="btn btn-primary">删除</button></a>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+
+
+</div>
+
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock %}

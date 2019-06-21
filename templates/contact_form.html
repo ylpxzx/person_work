@@ -1,0 +1,61 @@
+{% extends "./index.html" %}
+{% load static %}
+
+
+
+{% block main %}
+<div class="card col-8">
+
+<div class="jumbotron jumbotron-fluid"style="background-color: cornflowerblue;margin-top: 10px;">
+    <h2 class="display-4">添加联系人</h2>
+  </div>
+    <form method="post" enctype="multipart/form-data">
+{{ form.non_field_errors }}
+        {% csrf_token %}
+ <div class="fieldWrapper form-group">
+        {{ form.name.errors }}
+            <label for="{{ form.name.id_for_label }}"><h4>Name:</h4></label>
+        <input  class="form-control" placeholder="Enter name" type="text" id="id_name" name="name">
+        </div>
+
+        <div class="fieldWrapper form-group">
+        {{ form.relation.errors }}
+            <label for="{{ form.relation.id_for_label }}"><h4>Relation:</h4></label>
+        <input  class="form-control" placeholder="Enter relation" type="text" id="id_relation" name="relation">
+        </div>
+
+    <div class="fieldWrapper form-group">
+    {{ form.word.errors }}
+        <label for="{{ form.word.id_for_label }}"><h4>Word:</h4></label>
+     <input  class="form-control" placeholder="Enter Word" type="text" id="id_word" name="word">
+</div>
+    <div class="fieldWrapper form-group">
+    {{ form.phone.errors }}
+        <label for="{{ form.phone.id_for_label }}"><h4>Phone:</h4></label>
+    <input  class="form-control" placeholder="Enter Phone" type="text" id="id_phone" name="phone">
+</div>
+    <div class="fieldWrapper form-group">
+    {{ form.email.errors }}
+
+        <label for="{{ form.eamil.id_for_label }}"><h4>Email:</h4></label>
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+            <input  class="form-control" placeholder="name@example.com" type="email" id="id_email" name="email">
+        </div>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+</div>
+    <div class="fieldWrapper form-group">
+    {{ form.sex.errors }}
+     <label for="{{ form.sex.id_for_label }}"><h5>性别:</h5></label>
+     <div class="input-group-prepend">
+    {{ form.sex }}
+     </div>
+</div>
+        <button type="submit" class="btn btn-primary"style="float: right;">Submit</button>
+          </form>
+
+
+</div>
+
+
+{% endblock %}

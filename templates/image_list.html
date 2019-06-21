@@ -1,0 +1,40 @@
+{% extends "./index.html" %}
+{% load static %}
+
+
+{% block main %}
+
+<div class="card col-8">
+     <button type="button" class="btn btn-primary btn-lg btn-block"style="background-color: cadetblue"><a href="{% url 'image:image_form' %}"style="color: black;">添加照片</a></button>
+  <div class="row no-gutters">
+
+
+
+
+         <div class="row">
+{% for image in images %}
+  <div class="col-sm-6"style="padding-bottom: 10px;padding-left: 5px;padding-right: 5px;padding-top: 10px">
+    <div class="card">
+        <img src="/media/{{ image.image3 }}" class="card-img-top" alt="...">
+      <div class="card-body">
+          <p class="card-text"style="display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;">{{ memo.content }}</p>
+        <p class="card-text"style="padding-top: 10px"><small class="text-muted">{{ image.created_time }}</small></p>
+           <a href="/delimage/?id={{ image.id }}"><button class="btn btn-primary">删除</button></a>
+      </div>
+    </div>
+
+  </div>
+{% endfor %}
+
+
+</div>
+
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock %}

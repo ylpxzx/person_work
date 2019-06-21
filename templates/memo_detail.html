@@ -1,0 +1,49 @@
+{% extends "./index.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="card col-8">
+  <div class="row no-gutters"style="padding-top: 20px">
+
+
+    <div class="card mb-3">
+      <h5 class="card-header"style="background-color: cadetblue">便签</h5>
+  <div class="card-body">
+    {{ forloop.counter }}
+
+    <h4 class="card-title">{% autoescape off %}{{ detail_memos.content }}{% endautoescape %}</h4>
+    <a href="/delmemo/?id={{ detail_memos.id }}"><button class="btn btn-primary">删除</button></a>
+    <p class="card-text"style="float: right"><small class="text-muted">{{ detail_memos.created_time }}</small></p>
+
+  </div>
+</div>
+<div class="spinner-grow text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-light" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-dark" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "./index.html" %}
+{% load static %}
+
+{% block title %}
+{{ form.media }}
+{% endblock %}
+
+{% block main %}
+<div class="card col-8">
+
+<div class="jumbotron jumbotron-fluid"style="background-color: cornflowerblue;margin-top: 10px;">
+    <h2 class="display-4">添加便签</h2>
+  </div>
+
+    <form method="post" enctype="multipart/form-data">
+{{ form.non_field_errors }}
+        {% csrf_token %}
+        <div class="fieldWrapper form-group">
+    {{ form.title.errors }}
+        <label for="{{ form.title.id_for_label }}"><h4>Your Title:</h4></label>
+        <div class="input-group-prepend">
+            <textarea class="form-control" id="id_title" rows="3" name="title"></textarea>
+        </div>
+</div>
+
+    {{ form.content }}
+
+
+ <div class="fieldWrapper form-group">
+    {{ form.category.errors }}
+     <label for="{{ form.category.id_for_label }}"><h5>类别:</h5></label>
+
+     <div class="input-group-prepend">
+    {{ form.category }}
+
+     </div>
+</div>
+{{ form.Description }}
+ <div class="fieldWrapper">
+    {{ form.image2.errors }}
+    <label for="{{ form.image2.id_for_label }}"><h3>上传图片:</h3></label>
+    {{ form.image2 }}
+</div>
+ <button type="submit" class="btn btn-primary"style="float: right;">Submit</button>
+          </form>
+</div>
+
+
+{% endblock %}

@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ibm_project1',
         'USER': 'root',
-        'PASSWORD': '928587987',
+        'PASSWORD': '自己数据密码',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8', },
@@ -160,7 +160,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'xzxylpxzx@163.com'
-EMAIL_HOST_PASSWORD = 'wsm928587987'
+#设置自己的163邮箱的密匙
+EMAIL_HOST_PASSWORD = ''
 
 
 # 注册有效期天数
